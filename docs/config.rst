@@ -72,8 +72,9 @@ The following configuration values are used internally by Flask:
 ``SESSION_COOKIE_NAME``           the name of the session cookie
 ``SESSION_COOKIE_DOMAIN``         the domain for the session cookie.  If
                                   this is not set, the cookie will be
-                                  valid for all subdomains of
-                                  ``SERVER_NAME``.
+                                  valid for all subdomains of whichever is
+                                  defined of ``EXTERNAL_SERVER_NAME`` or
+                                  ``SERVER_NAME`` in that order
 ``SESSION_COOKIE_PATH``           the path for the session cookie.  If
                                   this is not set the cookie will be valid
                                   for all of ``APPLICATION_ROOT`` or if
@@ -116,6 +117,8 @@ The following configuration values are used internally by Flask:
                                   by default enables URL generation
                                   without a request context but with an
                                   application context.
+``EXTERNAL_SERVER_NAME``          if defined, this will be used instead of
+                                  ``SERVER_NAME`` for URL generation
 ``APPLICATION_ROOT``              If the application does not occupy
                                   a whole domain or subdomain this can
                                   be set to the path where the application

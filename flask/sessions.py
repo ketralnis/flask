@@ -204,9 +204,11 @@ class SessionInterface(object):
         """
         if app.config['SESSION_COOKIE_DOMAIN'] is not None:
             return app.config['SESSION_COOKIE_DOMAIN']
-        if app.config['SERVER_NAME'] is not None:
+        server_name = (app.config['EXTERNAL_SERVER_NAME'] or
+                       app.config['SERVER_NAME'])
+        if server_name is not None:
             # chop off the port which is usually not supported by browsers
-            rv = '.' + app.config['SERVER_NAME'].rsplit(':', 1)[0]
+            rv = '.' + server_name.rsplit(':', 1)[0]
 
             # Google chrome does not like cookies set to .localhost, so
             # we just go with no domain then.  Flask documents anyways that

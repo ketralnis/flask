@@ -281,6 +281,7 @@ class Flask(_PackageBoundObject):
         'LOGGER_NAME':                          None,
         'LOGGER_HANDLER_POLICY':               'always',
         'SERVER_NAME':                          None,
+        'EXTERNAL_SERVER_NAME':                 None,
         'APPLICATION_ROOT':                     None,
         'SESSION_COOKIE_NAME':                  'session',
         'SESSION_COOKIE_DOMAIN':                None,
@@ -1677,14 +1678,16 @@ class Flask(_PackageBoundObject):
            This can now also be called without a request object when the
            URL adapter is created for the application context.
         """
+        server_name = (self.config['EXTERNAL_SERVER_NAME'] or
+                       self.config['SERVER_NAME'])
         if request is not None:
             return self.url_map.bind_to_environ(request.environ,
-                server_name=self.config['SERVER_NAME'])
+                server_name=server_name)
         # We need at the very least the server name to be set for this
         # to work.
-        if self.config['SERVER_NAME'] is not None:
+        if server_name is not None:
             return self.url_map.bind(
-                self.config['SERVER_NAME'],
+                server_name,
                 script_name=self.config['APPLICATION_ROOT'] or '/',
                 url_scheme=self.config['PREFERRED_URL_SCHEME'])
 

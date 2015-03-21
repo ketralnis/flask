@@ -70,9 +70,9 @@ The second way is the explicit way using the
         # within this block, current_app points to app.
         print current_app.name
 
-The application context is also used by the :func:`~flask.url_for`
-function in case a ``SERVER_NAME`` was configured.  This allows you to
-generate URLs even in the absence of a request.
+The application context is also used by the :func:`~flask.url_for` function in
+case a ``SERVER_NAME`` and/or ``EXTERNAL_SERVER_NAME`` was configured.  This
+allows you to generate URLs even in the absence of a request.
 
 Locality of the Context
 -----------------------
